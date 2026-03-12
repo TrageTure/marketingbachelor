@@ -9,6 +9,7 @@ export default function Navbar() {
   const [toastVisible, setToastVisible] = useState(false)
 
   const showToast = () => setToastVisible(true)
+  const closeMenu = () => setMenuOpen(false)
 
   return (
     <>
@@ -28,9 +29,9 @@ export default function Navbar() {
         <span className="navbar__hamburger-line" />
       </button>
       <div className={`navbar__menu ${menuOpen ? 'navbar__menu--open' : ''}`}>
-        <a href="#zoek" className="navbar__link">Zoek een tuin</a>
-        <a href="#hoe-werkt-het" className="navbar__link">Hoe werkt het</a>
-        <a href="#over-ons" className="navbar__link">Over ons</a>
+        <a href="#zoek" className="navbar__link" onClick={closeMenu}>Zoek een tuin</a>
+        <a href="#hoe-werkt-het" className="navbar__link" onClick={closeMenu}>Hoe werkt het</a>
+        <a href="#over-ons" className="navbar__link" onClick={closeMenu}>Over ons</a>
         <div className="navbar__actions">
           <Button variant="outline" onClick={showToast}>Login</Button>
           <Button variant="primary" onClick={showToast}>Registreer</Button>
