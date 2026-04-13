@@ -9,12 +9,26 @@ import './Hero.css'
 
 export default function Hero() {
   const [toastVisible, setToastVisible] = useState(false)
+  const [email, setEmail] = useState('')
+  const [toastMessage, setToastMessage] = useState('Binnenkort beschikbaar!')
 
-  const showToast = () => setToastVisible(true)
+  const showToast = (message = 'Binnenkort beschikbaar!') => {
+    setToastMessage(message)
+    setToastVisible(true)
+  }
+
+  const handleSubscribe = (e) => {
+    e.preventDefault()
+    if (email.trim()) {
+      console.log('Email subscription:', email)
+      showToast('Dank je voor je inschrijving! We nemen snel contact op.')
+      setEmail('')
+    }
+  }
 
   return (
     <section className="hero">
-      <Toast message="Binnenkort beschikbaar!" visible={toastVisible} onClose={() => setToastVisible(false)} />
+      <Toast message={toastMessage} visible={toastVisible} onClose={() => setToastVisible(false)} />
       <div className="hero__background">
         <img src={bgCircles} alt="" />
       </div>
@@ -30,19 +44,19 @@ export default function Hero() {
           </p>
         </div>
         <div className="hero__actions">
-          <form className="hero__search" onSubmit={(e) => { e.preventDefault(); window.open('https://bachelorkaart.netlify.app/', '_blank'); }}>
+          <form className="hero__search" onSubmit={handleSubscribe}>
             <div className="hero__search-inner">
-              <div className="hero__search-icon">
-                <img src={searchIcon} alt="" />
-              </div>
               <input
-                type="text"
+                type="email"
                 className="hero__search-input"
-                placeholder="Zoek een tuin in jouw buurt"
+                placeholder="Voer je email in voor meer info"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <span className="hero__search-button">
-              <Button variant="primary" type="submit">Bekijk aanbod</Button>
+              <Button variant="primary" type="submit">Abonneer</Button>
             </span>
           </form>
           <div className="hero__buttons">

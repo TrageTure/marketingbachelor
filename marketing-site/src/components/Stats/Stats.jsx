@@ -3,7 +3,7 @@ import './Stats.css'
 const stats = [
   { value: '73', unit: '%', label: 'Privétuinen onderbenut' },
   { value: '1 op 3', unit: '', label: 'Stadsbewoners zonder tuin' },
-  { value: '2', unit: 'jr', label: 'Iteratief onderzoek' },
+  { value: '2', unit: ' jaar', label: 'Iteratief onderzoek' },
   { value: '100', unit: '%', label: 'Lokaal & gemeenschapsgericht' },
 ]
 

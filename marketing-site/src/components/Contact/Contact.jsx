@@ -4,7 +4,7 @@ import Button from '../Button/Button'
 import iconMail from '../../assets/65eedffa60749e5b6cc606fc1c1beeb9ddb420ce.svg'
 import iconPhone from '../../assets/3c59b97f7a86e6a864e93f36bfd0862eaec5df54.svg'
 import iconDownload from '../../assets/c0fa97aa1a59af56d5947d1c07772185db2d4e89.svg'
-import iconTest from '../../assets/92113fdbb444f5ec2e4328ec3880df115825a8f0.svg'
+import iconTest from '../../assets/test_product_icon.svg'
 import plantIcon from '../../assets/8d75e753870d5d6108adfc829bb72987b196736f.svg'
 import './Contact.css'
 

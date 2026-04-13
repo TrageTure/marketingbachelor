@@ -49,7 +49,7 @@
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: var(--text-h3);
-  color: var(--groen-300);
+  color: var(--groen-200);
 }
 
 .stats__label {
