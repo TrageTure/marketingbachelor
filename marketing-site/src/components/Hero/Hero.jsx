@@ -2,27 +2,38 @@ import { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import Button from '../Button/Button'
 import Toast from '../Toast/Toast'
+import { upsertMailerLiteSubscriber } from '../../services/mailerlite'
 import bgCircles from '../../assets/badb79d76cb3d7859a870ccf6e97a6a33bd0237b.svg'
 import plantImg from '../../assets/d0b4c2265cd3f4d0c3135c2314b1a3bc055f0b96.png'
-import searchIcon from '../../assets/dfae5efb117c5517abbe615e7f312d702d40975e.svg'
 import './Hero.css'
 
 export default function Hero() {
   const [toastVisible, setToastVisible] = useState(false)
   const [email, setEmail] = useState('')
   const [toastMessage, setToastMessage] = useState('Binnenkort beschikbaar!')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const showToast = (message = 'Binnenkort beschikbaar!') => {
     setToastMessage(message)
     setToastVisible(true)
   }
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault()
-    if (email.trim()) {
-      console.log('Email subscription:', email)
+
+    const normalizedEmail = email.trim().toLowerCase()
+    if (!normalizedEmail || isSubmitting) return
+
+    setIsSubmitting(true)
+    try {
+      await upsertMailerLiteSubscriber(normalizedEmail)
       showToast('Dank je voor je inschrijving! We nemen snel contact op.')
       setEmail('')
+    } catch (error) {
+      console.error('MailerLite subscribe failed:', error)
+      showToast(error.message || 'Inschrijving mislukt. Probeer het later opnieuw.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -56,7 +67,9 @@ export default function Hero() {
               />
             </div>
             <span className="hero__search-button">
-              <Button variant="primary" type="submit">Abonneer</Button>
+              <Button variant="primary" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Bezig...' : 'Abonneer'}
+              </Button>
             </span>
           </form>
           <div className="hero__buttons">

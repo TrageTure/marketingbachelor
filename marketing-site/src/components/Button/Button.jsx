@@ -1,6 +1,15 @@
 import './Button.css'
 
-export default function Button({ children, variant = 'primary', rounded = false, fullWidth = false, className = '', onClick }) {
+export default function Button({
+  children,
+  variant = 'primary',
+  rounded = false,
+  fullWidth = false,
+  className = '',
+  onClick,
+  type = 'button',
+  disabled = false,
+}) {
   const classes = [
     'button',
     `button--${variant}`,
@@ -11,5 +20,9 @@ export default function Button({ children, variant = 'primary', rounded = false,
     .filter(Boolean)
     .join(' ')
 
-  return <button className={classes} onClick={onClick}>{children}</button>
+  return (
+    <button className={classes} onClick={onClick} type={type} disabled={disabled}>
+      {children}
+    </button>
+  )
 }
